@@ -43,9 +43,10 @@ galleryContainer.innerHTML = images
   )
   .join("");
 
-// Ініціалізація SimpleLightbox
+// Ініціалізація SimpleLightbox після додавання елементів у DOM
 const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
+  captionPosition: "bottom",
   captionDelay: 250,
   overlayOpacity: 0.8,
   showCounter: true,
