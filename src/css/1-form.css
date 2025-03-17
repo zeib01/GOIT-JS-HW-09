@@ -1,44 +1,92 @@
-.body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    margin: 0;
-  }
-  .feedback-form {
-    display: flex;
-    flex-direction: column;
-    width: 320px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+.feedback-form {
+  border-radius: 8px;
+  padding: 24px;
+  width: 408px;
+  height: 296px;
+
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
   label {
     display: flex;
     flex-direction: column;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  input, textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-  button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    gap: 8px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
     font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+
+    text-align: left;
   }
-  button:hover {
-    background-color: #0056b3;
+
+  input {
+    border: 1px solid #808080;
+    border-radius: 4px;
+    width: 360px;
+    min-height: 40px;
+
+    padding: 8px 16px;
   }
+
+  input:hover,
+  input:focus,
+  textarea:hover,
+  textarea:focus {
+    border-color: #000;
+  }
+
+  textarea {
+    border: 1px solid #808080;
+    border-radius: 4px;
+    width: 360px;
+    max-height: 80px;
+
+    padding: 8px 16px;
+    margin-bottom: 16px;
+
+    resize: none;
+  }
+
+  input,
+  textarea {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+  }
+
+  button {
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 95px;
+    height: 40px;
+
+    background: #4e75ff;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #fff;
+
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button:hover,
+  button:focus {
+    background: #6c8cff;
+    outline: none;
+  }
+}
