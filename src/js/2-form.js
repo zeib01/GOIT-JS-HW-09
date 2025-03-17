@@ -1,51 +1,39 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-
-const form = document.querySelector(".feedback-form");
-const texareaMessage = form.elements.message;
-const userEmail = form.elements.email;
-const localStorageKey = "feedback-form-state";
+const form = document.querySelector('.feedback-form');
+const STORAGE_KEY = 'feedback-form-state';
 
 let formData = {
-    email: "",
-    message: "",
+  email: '',
+  message: '',
 };
 
-// При завантаженні сторінки перевіряємо наявність даних у локальному сховищі
-const savedData = JSON.parse(localStorage.getItem(localStorageKey));
+// Перевірка локального сховища при завантаженні сторінки
+const savedData = localStorage.getItem(STORAGE_KEY);
 if (savedData) {
-    formData = savedData;
-    userEmail.value = formData.email || "";
-    texareaMessage.value = formData.message || "";
+  formData = JSON.parse(savedData);
+  form.email.value = formData.email;
+  form.message.value = formData.message;
 }
 
-// Використовуємо делегування для відстеження змін
-form.addEventListener("input", (e) => {
-    if (e.target.name === "email") {
-        formData.email = e.target.value;
-    } else if (e.target.name === "message") {
-        formData.message = e.target.value;
-    }
-    // Зберігаємо об'єкт formData в локальному сховищі
-    localStorage.setItem(localStorageKey, JSON.stringify(formData));
+// Обробник події input з використанням делегування
+form.addEventListener('input', event => {
+  formData[event.target.name] = event.target.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 });
 
-// Відправка форми
-form.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    
-    // Перевірка, чи заповнені всі поля
-    if (!formData.email.trim() || !formData.message.trim()) {
-        alert("Fill please all fields");
-        return;
-    }
-    
-    // Виведення об'єкта formData в консоль
-    console.log("Form Data:", formData);
-    
-    // Очищення форми, локального сховища та об'єкта formData
-    form.reset();
-    localStorage.removeItem(localStorageKey);
-    formData = { email: "", message: "" };
+// Обробник події submit
+form.addEventListener('submit', event => {
+  event.preventDefault();
+
+  if (!formData.email.trim() || !formData.message.trim()) {
+    alert('Fill please all fields');
+    return;
+  }
+
+  console.log(formData);
+  localStorage.removeItem(STORAGE_KEY);
+  formData = { email: '', message: '' };
+  form.reset();
 });
