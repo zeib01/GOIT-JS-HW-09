@@ -1,4 +1,7 @@
+// Основний імпорт бібліотеки
 import SimpleLightbox from 'simplelightbox';
+
+// Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const images = [
@@ -67,39 +70,24 @@ const images = [
   },
 ];
 
-const form = document.querySelector('.feedback-form');
-const textareaMessage = form.elements.message;
-const userEmail = form.elements.email;
-const localStorageKey = 'feedback-form-state';
+// Створюємо галерею
+const galleryContainer = document.querySelector('.gallery');
 
-// Отримуємо збережені дані або створюємо порожній об'єкт
-let formData = JSON.parse(localStorage.getItem(localStorageKey)) || {
-  email: '',
-  message: '',
-};
+galleryContainer.innerHTML = images
+  .map(
+    image => `
+        <li class="gallery-item">
+          <a class="gallery-link" href="${image.original}">
+            <img class="gallery-image" src="${image.preview}" alt="${image.description}" />
+          </a>
+        </li>
+      `
+  )
+  .join('');
 
-// Заповнюємо форму, якщо є збережені дані
-userEmail.value = formData.email;
-textareaMessage.value = formData.message;
-
-// Відстежуємо введення даних у форму
-form.addEventListener('input', e => {
-  formData[e.target.name] = e.target.value;
-  localStorage.setItem(localStorageKey, JSON.stringify(formData));
-});
-
-// Обробник відправки форми
-form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  if (!userEmail.value.trim() || !textareaMessage.value.trim()) {
-    return alert('Fill please all fields');
-  }
-
-  console.log('Form Data:', formData);
-
-  // Очищення форми, локального сховища та об'єкта formData
-  form.reset();
-  localStorage.removeItem(localStorageKey);
-  formData = { email: '', message: '' };
+// Ініціалізація SimpleLightbox
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt', // Використовуємо текст з атрибута alt як підпис
+  captionDelay: 250, // Затримка перед показом підпису
+  showCounter: true, // Відображення лічильника зображень
 });
